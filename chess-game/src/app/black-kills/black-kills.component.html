@@ -1,0 +1,7 @@
+<div *ngIf="data.length > -1">
+  <div *ngFor="let d of data">
+    <div *ngIf="d.cell" class="cells">
+      <i [ngClass]="d.cell.icon"></i>
+    </div>
+  </div>
+</div>

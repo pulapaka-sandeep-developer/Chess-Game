@@ -45,7 +45,13 @@
     justify-content: center;
   }
 
+  .row {
+    display: flex;
+  }
+
   .main {
+    margin-left: 100px;
+    margin-right: 100px;
     position: relative;
     left: 0%;
     top: 0px; //old 100

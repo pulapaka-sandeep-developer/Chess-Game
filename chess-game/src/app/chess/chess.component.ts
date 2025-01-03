@@ -16,12 +16,23 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { Dialog, DialogModule, DialogRef } from '@angular/cdk/dialog';
 import { CongratulationsComponent } from '../congratulations/congratulations.component';
+import { BlackKillsComponent } from '../black-kills/black-kills.component';
+import { WhiteKillsComponent } from '../white-kills/white-kills.component';
+import { GetLoadBlackPowers } from '../_/types/getLoadBlackPowers';
+import { GetLoadWhitePowers } from '../_/types/getLoadWhitePowers';
 @Component({
   selector: 'app-chess',
   templateUrl: './chess.component.html',
   styleUrls: ['./chess.component.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule, MatButtonModule, MatDialogModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatButtonModule,
+    MatDialogModule,
+    // BlackKillsComponent,
+    // WhiteKillsComponent,
+  ],
 })
 export class ChessComponent implements OnInit {
   board: Cell[][] = [];
@@ -86,10 +97,12 @@ export class ChessComponent implements OnInit {
   }
 
   prepareBoard() {
-    this.loadBlackConies();
+    // new GetLoadBlackPowers(this.board);
+    // new GetLoadWhitePowers(this.board);
 
     //white coines
     this.loadWhiteCoines();
+    this.loadBlackConies();
 
     this.board.filter((rows, i) => {
       rows.filter((e, j) => {
@@ -396,6 +409,29 @@ export class ChessComponent implements OnInit {
     return coordinates;
   }
 
+  // whiteKiil: OptionalIndex[] = [];
+  // BlackKiil: OptionalIndex[] = [];
+  // previousCell: OptionalIndex[] = [];
+
+  // killPower(currentPosition: OptionalIndex) {
+  //   // debugger;
+  //   if (this.previousCell.length < 1) return;
+  //   if (
+  //     this.previousCell[this.previousCell.length - 1].cell.clue !== 0 &&
+  //     currentPosition.cell.clue !== 0
+  //   ) {
+  //     if (currentPosition.cell.isBlackCoin) {
+  //       debugger;
+  //       this.BlackKiil.push(currentPosition);
+  //     } else if (currentPosition.cell.isWhiteCoin) {
+  //       this.whiteKiil.push(currentPosition);
+  //     }
+  //   }
+  //   console.log('white', this.whiteKiil);
+  //   console.log('black', this.BlackKiil);
+  //   this.previousCell = [];
+  // }
+
   $$selectMember(rowindex: number, columnindex: number, cell: Cell): void {
     if (cell.highlight) {
       this.currentPosition = {
@@ -403,8 +439,10 @@ export class ChessComponent implements OnInit {
         columnIndex: columnindex,
         cell: cell,
       };
+      // this.killPower(this.currentPosition);
       this.alert();
       this.$$move(this.currentPosition, this.previousPosition);
+      this.alert();
       this.check();
     } else {
       this.previousPosition = {
@@ -412,6 +450,7 @@ export class ChessComponent implements OnInit {
         columnIndex: columnindex,
         cell: cell,
       };
+      // this.previousCell.push(this.previousPosition);
       this.coordinates.forEach(
         (e) => (this.board[e.row][e.column].highlight = false)
       );
@@ -719,7 +758,6 @@ export class ChessComponent implements OnInit {
       member.rowIndex,
       member.columnIndex
     );
-    // return coordinates;
     if (member.cell.isWhiteCoin) {
       coordinates.forEach((coordinate) => {
         if (this.board[coordinate.row][coordinate.column].clue === Coins.Zero) {
@@ -765,6 +803,7 @@ export class ChessComponent implements OnInit {
         );
         if (isExist > 0) coordinates.splice(isExist, 1);
       }
+
       coordinates.forEach((coordinate) => {
         if (this.board[coordinate.row][coordinate.column].clue === Coins.Zero) {
           //one cell up
@@ -1004,6 +1043,7 @@ export class ChessComponent implements OnInit {
   }
 
   $$move(currentPosition: OptionalIndex, previousPosition: OptionalIndex) {
+    console.log(this.currentPosition, this.previousPosition);
     if (previousPosition.cell.clue > 0 && currentPosition.cell.clue > 0) {
       this.changeCoine(currentPosition, previousPosition);
     } else {
@@ -1121,7 +1161,7 @@ export class ChessComponent implements OnInit {
     this.dialog.open(CongratulationsComponent, {
       data: [a],
       width: '28%',
-      height: '52.4%',
+      height: '56.4%',
       disableClose: true,
     });
   }
@@ -1130,15 +1170,15 @@ export class ChessComponent implements OnInit {
     possibilityCoordinates.forEach((e) => {
       if (this.board[e.rowIndex][e.columnIndex].clue === Coins._wKing) {
         this.board[e.rowIndex][e.columnIndex].isAlert = true;
-        setTimeout(() => {
-          alert('Check in whtie  king');
-        }, 100);
+        // setTimeout(() => {
+        //   alert('Check in whtie  king');
+        // }, 100);
       }
       if (this.board[e.rowIndex][e.columnIndex].clue === Coins._bKing) {
         this.board[e.rowIndex][e.columnIndex].isAlert = true;
-        setTimeout(() => {
-          alert('Check in black king');
-        }, 100);
+        // setTimeout(() => {
+        //   alert('Check in black king');
+        // }, 100);
       }
       if (e) {
         e.cell.highlight = false;
