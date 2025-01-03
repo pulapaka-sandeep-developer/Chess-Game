@@ -1,0 +1,17 @@
+<div class="container">
+  <h1>Lengend</h1>
+  <div class="cell" *ngFor="let cell of data">
+    <div
+      [ngClass]="{
+        white: cell.isWhite,
+        black: cell.isBlack,
+        green: cell.isHiehtlight,
+        red: cell.isAlert
+      }"
+    ></div>
+    <div class="message">{{ cell.message }}</div>
+  </div>
+  <div class="btn">
+    <button mat-raised-button (click)="$$openChess()">let's Play</button>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="profile-image">
+    <img src="../../assets/images/cong.jpg" alt="" height="300px" srcset="" />
+  </div>
+
+  <div class="profile-view">
+    <div>
+      <img *ngIf="data[0].isWhite === true" src="../../assets/images/sandeep.jpg" alt="" class="images" width="100px"/>
+      <img *ngIf="data[0].isBlack === true" src="../../assets/images/raghu.avif" alt="" class="images"  width="100px"/>
+    </div>
+    <div class="user">
+      <div class="name">
+        <label for="name">Name</label>
+        <span>: {{ data[0].name }}</span>
+      </div>
+      <div class="age">
+        <label for="age"> Age</label>
+        <span> &nbsp; : {{ data[0].age }}</span>
+      </div>
+
+      <div class="colorss">
+        <label for="colors">Color</label
+        ><span>&nbsp;: {{ data[0].color }}</span>
+      </div>
+    </div>
+    <div class="wins">
+      <label for="wins"> Wins </label
+      ><span class="count">&nbsp;: {{ data[0].count }}</span>
+    </div>
+  </div>
+</div>
+<div class="play-btn">
+  <button mat-raised-button class="btn" (click)="$$playAgain()">
+    Play Again
+  </button>
+  <button mat-raised-button class="btn" (click)="$$close()">close</button>
+</div>

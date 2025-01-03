@@ -1,14 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Cell } from '../_/interfaces/cell.interface';
 import { Subject } from 'rxjs';
 
 @Injectable({
-	providedIn: 'root'
+  providedIn: 'root',
 })
 export class WiringService {
+  constructor() {}
 
-	constructor() { }
-
-	selcetedCoin$ = new Subject();
-
+  selcetedCoin$ = new Subject();
 }

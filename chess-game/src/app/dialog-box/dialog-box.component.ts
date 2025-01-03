@@ -10,39 +10,41 @@ import {
   MatDialogModule,
   MatDialogRef,
 } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { OptionalIndex } from '../_/interfaces/optionalIndex.interface';
 
 @Component({
   selector: 'app-dialog-box',
   templateUrl: './dialog-box.component.html',
   styleUrls: ['./dialog-box.component.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule, MatDialogModule],
+  imports: [CommonModule, MatButtonModule, FormsModule, MatDialogModule],
 })
 export class DialogBoxComponent implements OnInit {
   blackCoin = POWERSBLACk;
   whiteCoin = POWERSWHITE;
-  fakeData: any = [];
+  data: any = [];
 
   selectedCell!: Cell;
 
   constructor(
     private dialogRef: MatDialogRef<DialogBoxComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Cell
+    @Inject(MAT_DIALOG_DATA) public selectedMember: OptionalIndex
   ) {}
 
   ngOnInit(): void {
-    this.remove(this.data);
+    this.remove(this.selectedMember); //this.data
   }
 
-  remove(cell: Cell) {
-    const coins = cell.isBlackCoin ? this.blackCoin : this.whiteCoin;
+  remove(selectedMember: OptionalIndex) {
+    const coins = selectedMember.cell.isBlackCoin ? this.blackCoin : this.whiteCoin;
     coins.forEach((coins: Cell, index: number) => {
-      if (index <= 7) this.fakeData.push(coins);
+      if (index <= 7) this.data.push(coins);
     });
-    let king = this.fakeData.findIndex(
+    let king = this.data.findIndex(
       (cell: Cell) => cell.clue === Coins._bKing || cell.clue === Coins._wKing
     );
-    if (king > -1) this.fakeData.splice(king, 1);
+    if (king > -1) this.data.splice(king, 1);
   }
 
   onClick(cell: Cell) {

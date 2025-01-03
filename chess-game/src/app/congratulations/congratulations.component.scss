@@ -1,0 +1,54 @@
+.container {
+  background-color: black;
+}
+
+.profile-image {
+  display: flex;
+  justify-content: center;
+}
+.profile-view {
+  display: flex;
+  justify-content: space-around;
+  .image {
+    border: 1px inset;
+    width: 100px;
+  }
+  .user {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    label {
+      color: #ffd700;
+      font-size: 16px;
+      font-weight: 500;
+    }
+    span {
+      color: #ffd700;
+      margin-left: 20px;
+      font-size: 20px;
+      font-weight: 500;
+    }
+  }
+  .wins {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 30px;
+    color: #ffd700;
+
+    font-size: 20px;
+    font-weight: 500;
+
+    .count {
+      font-size: 20px;
+      font-weight: bold;
+    }
+  }
+}
+.play-btn {
+  background-color: black;
+  padding-bottom: 22px;
+  display: flex;
+  padding: 20px;
+  justify-content: space-between;
+}

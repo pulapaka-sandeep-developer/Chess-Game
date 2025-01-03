@@ -1,0 +1,11 @@
+<div class="container">
+  <div *ngIf="data">
+    <app-card-view [data]="data[0]"></app-card-view>
+  </div>
+  <img src="../../assets/images/final.avif" alt="" height="190px">
+  <div>
+    <app-card-view [data]="data[1]"></app-card-view>
+  </div>
+</div>
+
+<button (click)="$$playGame()">Start</button>

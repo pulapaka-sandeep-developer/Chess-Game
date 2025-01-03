@@ -8,4 +8,11 @@ export interface Cell {
   icon?: string;
   color?: boolean;
   isPossable?: boolean;
+  isCheckPossibility?: boolean;
+  isKilld?: boolean;
+  isAlert?: boolean;
+  isBlackKing?: boolean;
+  isWhiteKing?: boolean;
+  isMoveWhite?: boolean;
+  isMoveBlack?: boolean;
 }

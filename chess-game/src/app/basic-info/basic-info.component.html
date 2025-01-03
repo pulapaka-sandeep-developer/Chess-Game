@@ -1,0 +1,171 @@
+<div class="header">
+  <h1>Player's Basic Information</h1>
+  <div (click)="$$close()">X</div>
+</div>
+
+<div class="container">
+  <div class="left">
+    <h2>{{ playerName }} Player User Info</h2>
+    <form [formGroup]="playerOneUserInfo">
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>{{ playerName }} player Name</mat-label>
+          <input
+            type="text"
+            matInput
+            formControlName="name"
+            placeholder="Place enter the name"
+          />
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>{{ playerName }} player Age</mat-label>
+          <input
+            type="text"
+            matInput
+            formControlName="age"
+            placeholder="Place enter the age"
+          />
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Select Gender</mat-label>
+          <mat-select name="color" formControlName="gender">
+            <mat-option *ngFor="let gen of gender" [value]="gen.value">
+              {{ gen.value }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Select Coines Color</mat-label>
+          <mat-select name="color" formControlName="chooseColor">
+            <mat-option *ngFor="let color of colors" [value]="color.value">
+              {{ color.value }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div *ngIf="player1">
+        <!-- <img
+          *ngIf="playerOneimageUrl"
+          [src]="playerOneimageUrl"
+          alt="playerTwo"
+          height="50px"
+        /> -->
+        <input
+          type="file"
+          formControlName="profilePicture"
+          id="imageUpload"
+          accept=".png, .jpg, .jpeg"
+          #fileInput
+          (change)="uploadFile($event, 1)"
+        />
+      </div>
+      <div *ngIf="player2">
+        <!-- <img
+          *ngIf="playerTwoimageUrl"
+          [src]="playerTwoimageUrl"
+          alt="playerTwo"
+          height="50px"
+        /> -->
+
+        <input
+          type="file"
+          formControlName="profilePicture"
+          id="imageUpload"
+          accept=".png, .jpg, .jpeg"
+          #fileInput
+          (change)="uploadFile($event, 2)"
+        />
+      </div>
+    </form>
+  </div>
+
+  <!-- <div class="right">
+    <div>
+      <h2>Second Player User Info</h2>
+      <form [formGroup]="playerTwoUserInfo">
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Second player Name</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="playerTwoName"
+              placeholder="Place enter the name"
+            />
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Second player Age</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="playerTwoAge"
+              placeholder="Place enter the age"
+            />
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Select Gender</mat-label>
+            <mat-select name="color" formControlName="playerTwoGender">
+              <mat-option *ngFor="let gen of gender" [value]="gen.value">
+                {{ gen.value }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Select Coines Color</mat-label>
+            <mat-select name="color" formControlName="playerTwoChooseCoine">
+              <mat-option *ngFor="let color of colors" [value]="color.value">
+                {{ color.value }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div>
+          <img
+            *ngIf="playerTwoimageUrl"
+            [src]="playerTwoimageUrl"
+            alt="playerOne"
+            height="50px"
+          />
+          <input
+            type="file"
+            formControlName="playerTwoProfilePicture"
+            id="imageUpload"
+            accept=".png, .jpg, .jpeg"
+            #fileInput
+            (change)="uploadFile($event, 2)"
+          />
+        </div>
+      </form>
+    </div>
+  </div> -->
+</div>
+<div class="btn">
+  <button
+    class="play-btn"
+    mat-raised-button
+    color="primary"
+    (click)="$$startGame()"
+  >
+    Let's Go
+  </button>
+</div>
+<!-- <button
+    class="play-btn"
+    mat-raised-button
+    color="primary"
+    (click)="navigateTo()"
+  >
+    opne
+  </button> -->

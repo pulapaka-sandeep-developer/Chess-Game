@@ -1,5 +1,19 @@
-<div class="content">
-  <button mat-raised-button (click)="game()">Prepar Board</button>
+<div>
+  <div class="profile-image" *ngIf="playerOne">
+    <span [ngClass]="whiteTurn ? 'darkColor' : 'lightColor'">
+      <!--  -->
+      <img
+        src="../../assets/images/sandeep.jpg"
+        alt=""
+        srcset=""
+        class="image"
+      />
+    </span>
+    <div class="user" *ngIf="playerOne">
+      <span class="name">Sandeep</span>
+      <span class="color">White</span>
+    </div>
+  </div>
 </div>
 <div class="main">
   <div class="row" *ngFor="let rows of board; let i = index">
@@ -7,15 +21,32 @@
       <div
         class="cell"
         (click)="$$selectMember(i, j, cell)"
-        [ngClass]="{ changeColor: cell.highlight, brown: cell.color }"
+        [ngClass]="{
+          changeColor: cell.highlight,
+          brown: cell.color,
+          red: cell.isAlert
+        }"
       >
-        <!-- {{ i }} - {{ j }} -->
-        <!-- 'black':cell.isBlackCoin, 'green' :cell.isWhiteCoin, -->
-        <!-- <button *ngIf="cell.clue !== 0" mat-fab>{{cell.clue}}</button> -->
-        <button mat-fab *ngIf="cell.clue !== 0">
+        <!-- {{i}}-{{j}} -->
+        <span *ngIf="cell.clue !== 0">
           <i [ngClass]="cell.icon"></i>
-        </button>
+        </span>
       </div>
     </div>
   </div>
 </div>
+<div class="profile-image" *ngIf="playerTwo">
+  <span [ngClass]="BlackTurn ? 'darkColor' : 'lightColor'">
+    <img src="../../assets/images/raghu.avif" alt="" srcset="" class="image" />
+  </span>
+
+  <div class="user">
+    <div>
+      <span class="name">Raghu</span>
+    </div>
+    <div>
+      <span class="color">Black</span>
+    </div>
+  </div>
+</div>
+<!-- <button mat-raised-button (click)="openCongratulationsComponent()">open</button> -->

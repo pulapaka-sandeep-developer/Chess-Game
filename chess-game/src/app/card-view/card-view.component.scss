@@ -1,0 +1,33 @@
+.container {
+  display: flex;
+  width: 20%;
+  width: clamp(400px, 80%, 200px);
+  padding: 1.5rem;
+  font-size: 1.125rem;
+  color: white;
+  background: linear-gradient(150deg, #f731db, #4600f1 100%);
+  border-style: solid;
+  border-image: linear-gradient(to bottom right, #0066ff, #ff32d6) 1;
+  /* Border image can be enabled per side. */
+  /* border-image: linear-gradient(to bottom right, #0066ff, #ff32d6) 1 1 0 0; */
+  border-width: 5px;
+}
+
+.image {
+  border: 4px inset;
+  width: 100px;
+  border-top-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+}
+.profile-view {
+  margin-left: 20px;
+  label {
+    font-size: 16px;
+    font-weight: 500;
+  }
+  span {
+    margin-left: 20px;
+    font-size: 20px;
+    font-weight: 500;
+  }
+}

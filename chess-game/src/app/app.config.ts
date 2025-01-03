@@ -11,16 +11,13 @@ import {
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { MatButtonModule } from '@angular/material/button';
-import { AppComponent } from './app.component';
-
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideClientHydration(),
     provideHttpClient(withInterceptorsFromDi()),
-    provideAnimationsAsync(),
-    MatButtonModule,
+    provideAnimationsAsync()
   ],
 };

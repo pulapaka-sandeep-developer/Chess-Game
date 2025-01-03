@@ -15,6 +15,7 @@ import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { Dialog, DialogModule, DialogRef } from '@angular/cdk/dialog';
+import { CongratulationsComponent } from '../congratulations/congratulations.component';
 @Component({
   selector: 'app-chess',
   templateUrl: './chess.component.html',
@@ -34,6 +35,12 @@ export class ChessComponent implements OnInit {
   previousPosition!: OptionalIndex;
   currentPosition!: OptionalIndex;
 
+  whiteTurn: boolean = true;
+  BlackTurn: boolean = false;
+
+  playerOne: any = {};
+  playerTwo: any = {};
+
   nextPossibilityCoordinate = new NextPossibilityCoordinate(
     this.numberOfRows,
     this.numberOfColumns
@@ -46,6 +53,15 @@ export class ChessComponent implements OnInit {
 
   ngOnInit(): void {
     this.game();
+  }
+
+  getUserInfo() {
+    let player1: string = <string>localStorage.getItem('playerOne');
+    let player2: string = <string>localStorage.getItem('playerTwo');
+    let checkColor = JSON.parse(player1);
+    if (checkColor.chooseColor === 'White') {
+      this.playerOne = checkColor;
+    } else this.playerTwo = JSON.parse(player2);
   }
 
   game() {
@@ -66,42 +82,56 @@ export class ChessComponent implements OnInit {
         };
       }
     }
-    // console.log(this.board);
-
     this.prepareBoard();
   }
 
   prepareBoard() {
-    const surroundingCells: Coordinate[] = [];
+    this.loadBlackConies();
 
-    // this.board[this.numberOfRows - 1][this.numberOfColumns - 1] = {
-    //   clue: this.blackCoin[0].clue,
-    //   highlight: false,
-    //   isBlackCoin: true,
-    //   icon: this.blackCoin[0].icon,
-    //   color: true,
-    // };
-    // this.board[this.numberOfRows - 1][this.numberOfColumns - 2] = {
-    //   clue: this.blackCoin[1].clue,
-    //   highlight: false,
-    //   isBlackCoin: true,
-    //   icon: this.blackCoin[1].icon,
-    //   color: false,
-    // };
-    // this.board[this.numberOfRows - 1][this.numberOfColumns - 3] = {
-    //   clue: this.blackCoin[2].clue,
-    //   highlight: false,
-    //   isBlackCoin: true,
-    //   icon: this.blackCoin[2].icon,
-    //   color: true,
-    // };
-    // this.board[this.numberOfRows - 1][this.numberOfColumns - 4] = {
-    //   clue: this.blackCoin[3].clue,
-    //   highlight: false,
-    //   isBlackCoin: true,
-    //   icon: this.blackCoin[3].icon,
-    //   color: false,
-    // };
+    //white coines
+    this.loadWhiteCoines();
+
+    this.board.filter((rows, i) => {
+      rows.filter((e, j) => {
+        if (e.clue === Coins._bKing) {
+          this.board[i][j].isBlackKing = true;
+        }
+        if (e.clue === Coins._wKing) {
+          this.board[i][j].isWhiteKing = true;
+        }
+      });
+    });
+  }
+
+  loadBlackConies() {
+    this.board[this.numberOfRows - 1][this.numberOfColumns - 1] = {
+      clue: this.blackCoin[0].clue,
+      highlight: false,
+      isBlackCoin: true,
+      icon: this.blackCoin[0].icon,
+      color: true,
+    };
+    this.board[this.numberOfRows - 1][this.numberOfColumns - 2] = {
+      clue: this.blackCoin[1].clue,
+      highlight: false,
+      isBlackCoin: true,
+      icon: this.blackCoin[1].icon,
+      color: false,
+    };
+    this.board[this.numberOfRows - 1][this.numberOfColumns - 3] = {
+      clue: this.blackCoin[2].clue,
+      highlight: false,
+      isBlackCoin: true,
+      icon: this.blackCoin[2].icon,
+      color: true,
+    };
+    this.board[this.numberOfRows - 1][this.numberOfColumns - 4] = {
+      clue: this.blackCoin[3].clue,
+      highlight: false,
+      isBlackCoin: true,
+      icon: this.blackCoin[3].icon,
+      color: false,
+    };
     this.board[this.numberOfRows - 1][this.numberOfColumns - 5] = {
       clue: this.blackCoin[4].clue,
       highlight: false,
@@ -109,87 +139,87 @@ export class ChessComponent implements OnInit {
       icon: this.blackCoin[4].icon,
       color: true,
     };
-    // this.board[this.numberOfRows - 1][this.numberOfColumns - 6] = {
-    //   clue: this.blackCoin[5].clue,
-    //   highlight: false,
-    //   isBlackCoin: true,
-    //   icon: this.blackCoin[5].icon,
-    //   color: false,
-    // };
-    // this.board[this.numberOfRows - 1][this.numberOfColumns - 7] = {
-    //   clue: this.blackCoin[6].clue,
-    //   highlight: false,
-    //   isBlackCoin: true,
-    //   icon: this.blackCoin[6].icon,
-    //   color: true,
-    // };
-    // this.board[this.numberOfRows - 1][this.numberOfColumns - 8] = {
-    //   clue: this.blackCoin[7].clue,
-    //   highlight: false,
-    //   isBlackCoin: true,
-    //   icon: this.blackCoin[7].icon,
-    //   color: false,
-    // };
-    // //
-    // this.board[this.numberOfRows - 2][this.numberOfColumns - 1] = {
-    //   clue: this.blackCoin[8].clue,
-    //   highlight: false,
-    //   isBlackCoin: true,
-    //   icon: this.blackCoin[8].icon,
-    //   color: false,
-    // };
-    // this.board[this.numberOfRows - 2][this.numberOfColumns - 2] = {
-    //   clue: this.blackCoin[9].clue,
-    //   highlight: false,
-    //   isBlackCoin: true,
-    //   icon: this.blackCoin[9].icon,
-    //   color: true,
-    // };
-    // this.board[this.numberOfRows - 2][this.numberOfColumns - 3] = {
-    //   clue: this.blackCoin[10].clue,
-    //   highlight: false,
-    //   isBlackCoin: true,
-    //   icon: this.blackCoin[10].icon,
-    //   color: false,
-    // };
-    // this.board[this.numberOfRows - 2][this.numberOfColumns - 4] = {
-    //   clue: this.blackCoin[11].clue,
-    //   highlight: false,
-    //   isBlackCoin: true,
-    //   icon: this.blackCoin[11].icon,
-    //   color: true,
-    // };
-    // this.board[this.numberOfRows - 2][this.numberOfColumns - 5] = {
-    //   clue: this.blackCoin[12].clue,
-    //   highlight: false,
-    //   isBlackCoin: true,
-    //   icon: this.blackCoin[12].icon,
-    //   color: false,
-    // };
-    // this.board[this.numberOfRows - 2][this.numberOfColumns - 6] = {
-    //   clue: this.blackCoin[13].clue,
-    //   highlight: false,
-    //   isBlackCoin: true,
-    //   icon: this.blackCoin[13].icon,
-    //   color: true,
-    // };
-    // this.board[this.numberOfRows - 2][this.numberOfColumns - 7] = {
-    //   clue: this.blackCoin[14].clue,
-    //   highlight: false,
-    //   isBlackCoin: true,
-    //   icon: this.blackCoin[14].icon,
-    //   color: false,
-    // };
-    // this.board[this.numberOfRows - 2][this.numberOfColumns - 8] = {
-    //   clue: this.blackCoin[15].clue,
-    //   highlight: false,
-    //   isBlackCoin: true,
-    //   icon: this.blackCoin[15].icon,
-    //   color: true,
-    // };
+    this.board[this.numberOfRows - 1][this.numberOfColumns - 6] = {
+      clue: this.blackCoin[5].clue,
+      highlight: false,
+      isBlackCoin: true,
+      icon: this.blackCoin[5].icon,
+      color: false,
+    };
+    this.board[this.numberOfRows - 1][this.numberOfColumns - 7] = {
+      clue: this.blackCoin[6].clue,
+      highlight: false,
+      isBlackCoin: true,
+      icon: this.blackCoin[6].icon,
+      color: true,
+    };
+    this.board[this.numberOfRows - 1][this.numberOfColumns - 8] = {
+      clue: this.blackCoin[7].clue,
+      highlight: false,
+      isBlackCoin: true,
+      icon: this.blackCoin[7].icon,
+      color: false,
+    };
+    //
+    this.board[this.numberOfRows - 2][this.numberOfColumns - 1] = {
+      clue: this.blackCoin[8].clue,
+      highlight: false,
+      isBlackCoin: true,
+      icon: this.blackCoin[8].icon,
+      color: false,
+    };
+    this.board[this.numberOfRows - 2][this.numberOfColumns - 2] = {
+      clue: this.blackCoin[9].clue,
+      highlight: false,
+      isBlackCoin: true,
+      icon: this.blackCoin[9].icon,
+      color: true,
+    };
+    this.board[this.numberOfRows - 2][this.numberOfColumns - 3] = {
+      clue: this.blackCoin[10].clue,
+      highlight: false,
+      isBlackCoin: true,
+      icon: this.blackCoin[10].icon,
+      color: false,
+    };
+    this.board[this.numberOfRows - 2][this.numberOfColumns - 4] = {
+      clue: this.blackCoin[11].clue,
+      highlight: false,
+      isBlackCoin: true,
+      icon: this.blackCoin[11].icon,
+      color: true,
+    };
+    this.board[this.numberOfRows - 2][this.numberOfColumns - 5] = {
+      clue: this.blackCoin[12].clue,
+      highlight: false,
+      isBlackCoin: true,
+      icon: this.blackCoin[12].icon,
+      color: false,
+    };
+    this.board[this.numberOfRows - 2][this.numberOfColumns - 6] = {
+      clue: this.blackCoin[13].clue,
+      highlight: false,
+      isBlackCoin: true,
+      icon: this.blackCoin[13].icon,
+      color: true,
+    };
+    this.board[this.numberOfRows - 2][this.numberOfColumns - 7] = {
+      clue: this.blackCoin[14].clue,
+      highlight: false,
+      isBlackCoin: true,
+      icon: this.blackCoin[14].icon,
+      color: false,
+    };
+    this.board[this.numberOfRows - 2][this.numberOfColumns - 8] = {
+      clue: this.blackCoin[15].clue,
+      highlight: false,
+      isBlackCoin: true,
+      icon: this.blackCoin[15].icon,
+      color: true,
+    };
+  }
 
-    //white coines
-
+  loadWhiteCoines() {
     this.board[this.numberOfRows - 8][this.numberOfColumns - 1] = {
       clue: this.whiteCoin[0].clue,
       highlight: false,
@@ -268,20 +298,20 @@ export class ChessComponent implements OnInit {
       icon: this.whiteCoin[10].icon,
       color: true,
     };
-    // this.board[this.numberOfRows - 7][this.numberOfColumns - 4] = {
-    //   clue: this.whiteCoin[11].clue,
-    //   highlight: false,
-    //   isWhiteCoin: true,
-    //   icon: this.whiteCoin[11].icon,
-    //   color: false,
-    // };
-    // this.board[this.numberOfRows - 7][this.numberOfColumns - 5] = {
-    //   clue: this.whiteCoin[12].clue,
-    //   highlight: false,
-    //   isWhiteCoin: true,
-    //   icon: this.whiteCoin[12].icon,
-    //   color: true,
-    // };
+    this.board[this.numberOfRows - 7][this.numberOfColumns - 4] = {
+      clue: this.whiteCoin[11].clue,
+      highlight: false,
+      isWhiteCoin: true,
+      icon: this.whiteCoin[11].icon,
+      color: false,
+    };
+    this.board[this.numberOfRows - 7][this.numberOfColumns - 5] = {
+      clue: this.whiteCoin[12].clue,
+      highlight: false,
+      isWhiteCoin: true,
+      icon: this.whiteCoin[12].icon,
+      color: true,
+    };
     this.board[this.numberOfRows - 7][this.numberOfColumns - 6] = {
       clue: this.whiteCoin[13].clue,
       highlight: false,
@@ -306,8 +336,6 @@ export class ChessComponent implements OnInit {
 
   getMemberCoordinates(member: OptionalIndex, count?: boolean) {
     // this.initialSelectedCoin = member;
-    // console.log(member);
-
     let coordinates: Coordinate[] = [];
 
     if (
@@ -369,30 +397,27 @@ export class ChessComponent implements OnInit {
   }
 
   $$selectMember(rowindex: number, columnindex: number, cell: Cell): void {
-    console.log(rowindex, columnindex, cell);
     if (cell.highlight) {
       this.currentPosition = {
         rowIndex: rowindex,
         columnIndex: columnindex,
         cell: cell,
       };
-      this.check();
+      this.alert();
       this.$$move(this.currentPosition, this.previousPosition);
+      this.check();
     } else {
-      //   this.check();
       this.previousPosition = {
         rowIndex: rowindex,
         columnIndex: columnindex,
         cell: cell,
       };
-
       this.coordinates.forEach(
         (e) => (this.board[e.row][e.column].highlight = false)
       );
 
       let coordinates = this.getMemberCoordinates(this.previousPosition, true); //3
       this.checkPossibilities(this.previousPosition, coordinates);
-      this.check();
     }
   }
 
@@ -694,8 +719,6 @@ export class ChessComponent implements OnInit {
       member.rowIndex,
       member.columnIndex
     );
-    console.log(coordinates);
-
     // return coordinates;
     if (member.cell.isWhiteCoin) {
       coordinates.forEach((coordinate) => {
@@ -819,44 +842,60 @@ export class ChessComponent implements OnInit {
             if (this.board[coordinate.row][coordinate.column].isWhiteCoin)
               this.board[coordinate.row][coordinate.column].highlight = true;
           }
-
           this.coordinates.push(coordinate);
         }
       });
     }
   }
 
-  chooseYourPower(member: OptionalIndex) {
+  whitePowers(member: OptionalIndex, whiteCoins: Cell[]) {
     let selectedMember = member;
+    for (let i = 0; i < whiteCoins.length; i++) {
+      if (member.rowIndex > 6 && member.cell.clue === whiteCoins[i].clue) {
+        const dialogRef = this.dialog.open(DialogBoxComponent, {
+          data: member,
+        });
+        dialogRef.afterClosed().subscribe((selectedCell) => {
+          if (!selectedMember) return;
+          this.updateChooseCoine(selectedMember, selectedCell);
+        });
+      }
+    }
+  }
+
+  blackPowers(member: OptionalIndex, blackCoins: Cell[]) {
+    let selectedMember = member;
+    for (let j = 0; j < blackCoins.length; j++) {
+      if (member.rowIndex === 0 && member.cell.clue === blackCoins[j].clue) {
+        const dialogRef = this.dialog.open(DialogBoxComponent, {
+          data: member,
+        });
+        dialogRef.afterClosed().subscribe((selectedCell) => {
+          if (!selectedMember) return;
+          this.updateChooseCoine(selectedMember, selectedCell);
+        });
+      }
+    }
+  }
+
+  chooseYourPower(member: OptionalIndex) {
     if (member.cell.isWhiteCoin) {
-      for (let i = 0; i < this.whiteCoin.length; i++) {
-        if (
-          member.rowIndex > 6 &&
-          member.cell.clue === this.whiteCoin[i].clue
-        ) {
-          const dialogRef = this.dialog.open(DialogBoxComponent, {
-            data: member,
-          });
-          dialogRef.afterClosed().subscribe((selectedCell) => {
-            if (!selectedMember) return;
-            this.updateChooseCoine(selectedMember, selectedCell);
-          });
-        }
+      const whiteCoins: Cell[] = [];
+      this.whiteCoin.filter((e, i) => {
+        if (i > 7) whiteCoins.push(e);
+      });
+
+      if (whiteCoins && whiteCoins.length && whiteCoins.length > -1) {
+        this.whitePowers(member, whiteCoins);
       }
     } else if (member.cell.isBlackCoin) {
-      for (let j = 8; j < this.blackCoin.length; j++) {
-        if (
-          member.rowIndex === 0 &&
-          member.cell.clue === this.blackCoin[j].clue
-        ) {
-          const dialogRef = this.dialog.open(DialogBoxComponent, {
-            data: member,
-          });
-          dialogRef.afterClosed().subscribe((selectedCell) => {
-            if (!selectedMember) return;
-            this.updateChooseCoine(selectedMember, selectedCell);
-          });
-        }
+      const blackCoins: Cell[] = [];
+      this.blackCoin.filter((e, i) => {
+        if (i > 7) blackCoins.push(e);
+      });
+
+      if (blackCoins && blackCoins.length && blackCoins.length > -1) {
+        this.blackPowers(member, blackCoins);
       }
     }
   }
@@ -965,48 +1004,34 @@ export class ChessComponent implements OnInit {
   }
 
   $$move(currentPosition: OptionalIndex, previousPosition: OptionalIndex) {
-    if (this.checkCoine) {
-      // alert('checkmate');
-      this.changeCoine(currentPosition, previousPosition, false);
+    if (previousPosition.cell.clue > 0 && currentPosition.cell.clue > 0) {
+      this.changeCoine(currentPosition, previousPosition);
     } else {
-      // alert('checkmate');
-      this.changeCoine(currentPosition, previousPosition, true);
+      this.changeCoine(currentPosition, previousPosition);
     }
 
     this.chooseYourPower(currentPosition); //dialog box
-    this.check();
 
     this.coordinates.forEach(
       (e) => (this.board[e.row][e.column].highlight = false)
     );
     this.coordinates = [];
-
-    // this.$$selectMember(
-    //   currentPosition.rowIndex,
-    //   currentPosition.columnIndex,
-    //   currentPosition.cell
-    // );
-    // this.check();
-    // this.coordinates.forEach(
-    //   (e) => (this.board[e.row][e.column].highlight = false)
-    // );
-    // this.coordinates = [];
-    // console.log(this.coordinates);
   }
-  changeCoine(
-    currentPosition: OptionalIndex,
-    previousPosition: OptionalIndex,
-    win: boolean
-  ) {
-    if (!win) return;
+  changeCoine(currentPosition: OptionalIndex, previousPosition: OptionalIndex) {
+    this.gameEnd();
+    // this.moveColor();
+
     this.board[currentPosition.rowIndex][currentPosition.columnIndex].clue =
       previousPosition.cell.clue;
+
     this.board[currentPosition.rowIndex][
       currentPosition.columnIndex
     ].isWhiteCoin = previousPosition.cell.isWhiteCoin;
+
     this.board[currentPosition.rowIndex][
       currentPosition.columnIndex
     ].isBlackCoin = previousPosition.cell.isBlackCoin;
+
     this.board[currentPosition.rowIndex][currentPosition.columnIndex].icon =
       previousPosition.cell.icon;
 
@@ -1023,41 +1048,124 @@ export class ChessComponent implements OnInit {
 
     this.board[previousPosition.rowIndex][previousPosition.columnIndex].icon =
       '';
+    this.checkColor();
+    this.gameEnd();
   }
 
-  checkmate(initialSelectedCoin: OptionalIndex) {
-    let possibilityCoordinates: Coordinate[] = this.coordinates.filter(
-      (e) => this.board[e.row][e.column].highlight === true
-    );
-
-    // debugger;
-    if (initialSelectedCoin.cell.isBlackCoin === true) {
-      possibilityCoordinates.forEach((e) => {
-        if (this.board[e.row][e.column].clue === Coins._wKing) {
-          setTimeout(() => {
-            alert('Check in whtie  king');
-          }, 100);
+  gameEnd() {
+    let checkgame: Cell[] = [];
+    this.board.filter((rows, i) => {
+      rows.filter((e, j) => {
+        if (e.clue === Coins._wKing) {
+          checkgame.push(e);
+        }
+        if (e.clue === Coins._bKing) {
+          checkgame.push(e);
         }
       });
-    } else {
-      if (initialSelectedCoin.cell.isWhiteCoin === true) {
-        possibilityCoordinates.forEach((e, i) => {
-          if (this.board[e.row][e.column].clue === Coins._bKing) {
-            setTimeout(() => {
-              alert('Check in black king');
-            }, 100);
-          }
-        });
-      }
+    });
+    if (checkgame && checkgame.length && checkgame.length === 1) {
+      if (checkgame[0].isWhiteKing)
+        this.openCongratulationsComponent(checkgame);
+      else if (checkgame[0].isBlackKing)
+        this.openCongratulationsComponent(checkgame);
     }
+    checkgame = [];
+  }
+
+  alert() {
+    this.board.filter((rows, i) => {
+      rows.filter((e, j) => {
+        if (e.clue === Coins._wKing) {
+          e.isAlert = false;
+        }
+        if (e.clue === Coins._bKing) {
+          e.isAlert = false;
+        }
+      });
+    });
+  }
+
+  openCongratulationsComponent(checkgame: Cell[]) {
+    //checkgame: Cell
+    console.log('cell', checkgame);
+
+    let userData = [
+      {
+        name: 'Sandeep',
+        age: '28',
+        gender: 'Male',
+        profilePicture: '',
+        color: 'White',
+        isWhite: true,
+        count: 1,
+        isBlack: false,
+        clue: 2,
+      },
+      {
+        clue: 1,
+        name: 'Raghu',
+        age: '28',
+        gender: 'Male',
+        profilePicture: '',
+        color: 'Black',
+        isBlack: true,
+        isWhite: false,
+        count: 1,
+      },
+    ];
+
+    let a = userData.find((e) => e.clue === 1);
+    console.log('user', a);
+
+    this.dialog.open(CongratulationsComponent, {
+      data: [a],
+      width: '28%',
+      height: '52.4%',
+      disableClose: true,
+    });
+  }
+
+  checkmate(possibilityCoordinates: OptionalIndex[]) {
+    possibilityCoordinates.forEach((e) => {
+      if (this.board[e.rowIndex][e.columnIndex].clue === Coins._wKing) {
+        this.board[e.rowIndex][e.columnIndex].isAlert = true;
+        setTimeout(() => {
+          alert('Check in whtie  king');
+        }, 100);
+      }
+      if (this.board[e.rowIndex][e.columnIndex].clue === Coins._bKing) {
+        this.board[e.rowIndex][e.columnIndex].isAlert = true;
+        setTimeout(() => {
+          alert('Check in black king');
+        }, 100);
+      }
+      if (e) {
+        e.cell.highlight = false;
+      }
+    });
+    possibilityCoordinates = [];
+  }
+
+  isHighlightCoordinates() {
+    const highlightCoordinates: OptionalIndex[] = [];
+    this.board.filter((row, i) => {
+      row.filter((cell, j) => {
+        if (cell.highlight)
+          highlightCoordinates.push({
+            rowIndex: i,
+            columnIndex: j,
+            cell: cell,
+          });
+      });
+    });
+    return highlightCoordinates;
   }
 
   check() {
-    let boardCoordinate: OptionalIndex[] = [];
-
     this.board.filter((row, i) =>
       row.filter((cell, j) => {
-        if (cell.isBlackCoin === true || cell.isWhiteCoin === true) {
+        if (cell.isBlackCoin) {
           let coines: OptionalIndex = {
             rowIndex: i,
             columnIndex: j,
@@ -1065,56 +1173,31 @@ export class ChessComponent implements OnInit {
           };
           let coord = this.getMemberCoordinates(coines, false);
           this.checkPossibilities(coines, coord, false);
-          boardCoordinate.push(coines);
+          const highlightCoordinates = this.isHighlightCoordinates();
+          this.checkmate(highlightCoordinates);
         }
-        if (cell.highlight) {
-          cell.isPossable = true;
-          this.possibilityCoordinates.push({
+        if (cell.isWhiteCoin) {
+          let coines: OptionalIndex = {
             rowIndex: i,
             columnIndex: j,
             cell: cell,
-          });
+          };
+          let coord = this.getMemberCoordinates(coines, false);
+          this.checkPossibilities(coines, coord, false);
+          const highlightCoordinates = this.isHighlightCoordinates();
+          this.checkmate(highlightCoordinates);
         }
       })
     );
+  }
 
-    console.log(this.possibilityCoordinates);
-
-    this.possibilityCoordinates.forEach((e) => {
-      if (this.board[e.rowIndex][e.columnIndex].clue === Coins._bKing) {
-        console.log('Black checkmate');
-        alert('Black checkmate');
-      } else if (this.board[e.rowIndex][e.columnIndex].clue === Coins._wKing) {
-        console.log('white checkmate');
-        alert('white checkmate');
-      }
-    });
-    this.possibilityCoordinates = [];
-
-    //   this.possibilityCoordinates.forEach((e, i) => {
-    //     if (this.board[e.rowIndex][e.columnIndex].clue === Coins._bKing) {
-    //       // boardCoordinate.splice(i, 1);
-    //       this.checkCoine = true;
-    //       // debugger  ;
-    //       alert('Black checkmate');
-    //       // this.checkmate(e);
-    //     } else if (this.board[e.rowIndex][e.columnIndex].clue === Coins._wKing) {
-    //       this.checkCoine = true;
-    //       alert('white checkmate');
-    //     }
-    //     // if (
-    //     //   this.currentPosition &&
-    //     //   e.rowIndex === this.currentPosition.rowIndex &&
-    //     //   e.columnIndex === this.currentPosition.columnIndex &&
-    //     //   e.cell === this.currentPosition.cell
-    //     // ) {
-    //     //   this.checkCoine = true;
-    //     // }
-    //   });
-    //   this.possibilityCoordinates = [];
-    //   // console.log(boardCoordinate);
-    //   // console.log(this.coordinates);
-
-    //   boardCoordinate = [];
+  checkColor() {
+    if (this.whiteTurn) {
+      this.BlackTurn = true;
+      this.whiteTurn = false;
+    } else {
+      this.BlackTurn = false;
+      this.whiteTurn = true;
+    }
   }
 }
