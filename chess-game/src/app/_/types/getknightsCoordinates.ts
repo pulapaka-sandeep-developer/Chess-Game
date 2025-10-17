@@ -1,9 +1,9 @@
-import { Coordinate } from '../interfaces/coordinates.intreface';
+import { Coordinate } from '../interfaces/coordinates.interface';
 
-export class GetknightsCoordinates {
+export class knightsCoordinates {
   numberOfRows: number = 8;
   numberOfColumns: number = 8;
-  constructor() {}
+  constructor() { }
 
   knight(row: number, column: number): Coordinate[] {
     const surroundingCells: Coordinate[] = [];
@@ -30,3 +30,4 @@ export class GetknightsCoordinates {
     return surroundingCells;
   }
 }
+export const knight = new knightsCoordinates();

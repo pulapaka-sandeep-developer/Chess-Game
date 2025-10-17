@@ -5,6 +5,6 @@ export interface player {
   isWhite?: boolean;
   isBlack?: boolean;
   profilePicture: string;
-    color: string;
-    count: number
+  color: string;
+  count: number
 }

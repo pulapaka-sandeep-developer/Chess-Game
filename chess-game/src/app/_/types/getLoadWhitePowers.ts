@@ -1,12 +1,12 @@
 import { POWERSWHITE } from '../const/assigning-white-fontAwesome';
 import { Cell } from '../interfaces/cell.interface';
 
-export class GetLoadWhitePowers {
+export class LoadWhitePowers {
   numberOfRows: number = 8;
   numberOfColumns: number = 8;
   whiteCoin = POWERSWHITE;
-
-  constructor(private board: Cell[][]) {}
+  // board: Cell[][] = []
+  constructor(private board: Cell[][]) { }
 
   loadWhiteCoines() {
     this.board[this.numberOfRows - 8][this.numberOfColumns - 1] = {
@@ -123,3 +123,5 @@ export class GetLoadWhitePowers {
     };
   }
 }
+
+export const getLoadWhitePowers = new LoadWhitePowers([]);

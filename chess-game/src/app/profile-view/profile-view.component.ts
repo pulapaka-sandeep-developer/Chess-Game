@@ -15,7 +15,7 @@ import { CommonModule } from '@angular/common';
 export class ProfileViewComponent implements OnInit {
   constructor(
     private router: Router // private dialogRef: MatDialogRef<ProfileViewComponent>, // @Inject(MAT_DIALOG_DATA) public data: player[]
-  ) {}
+  ) { }
   data: player[] = [
     {
       name: 'ee',
@@ -24,7 +24,7 @@ export class ProfileViewComponent implements OnInit {
       profilePicture: 'C:\\fakepath\\2022-04-27.png',
       color: 'Black',
       isWhite: true,
-      count:0
+      count: 0
     },
     {
       name: 'ss',
@@ -33,7 +33,7 @@ export class ProfileViewComponent implements OnInit {
       profilePicture: 'C:\\fakepath\\2022-04-27.png',
       color: 'White',
       isBlack: true,
-      count:0
+      count: 0
     },
   ];
 

@@ -1,5 +1,5 @@
 import { Cell } from "./cell.interface";
-import { Coordinate } from "./coordinates.intreface";
+import { Coordinate } from "./coordinates.interface";
 import { OptionalIndex } from "./optionalIndex.interface";
 
 export interface ChessBoardInterface {

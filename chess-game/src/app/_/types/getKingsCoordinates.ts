@@ -1,10 +1,10 @@
 import { Direction } from '../enums/direction.enum';
-import { Coordinate } from '../interfaces/coordinates.intreface';
+import { Coordinate } from '../interfaces/coordinates.interface';
 
-export class GetKingsCoordinates {
+export class KingsCoordinates {
   numberOfRows: number = 0;
   numberOfColumns: number = 0;
-  constructor() {}
+  constructor() { }
   king(row: number, column: number): Coordinate[] {
     const surroundingCells: Coordinate[] = [];
     // surroundingCells.push({ row: row - 1, column: column - 1, direction: Direction.DownLeft });
@@ -71,3 +71,4 @@ export class GetKingsCoordinates {
     return surroundingCells;
   }
 }
+export const kingsCoordinates = new KingsCoordinates();

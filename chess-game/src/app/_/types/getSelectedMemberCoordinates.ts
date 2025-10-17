@@ -1,10 +1,9 @@
 import { Coins } from '../enums/coins.enum';
-import { Coordinate } from '../interfaces/coordinates.intreface';
+import { Coordinate } from '../interfaces/coordinates.interface';
 import { OptionalIndex } from '../interfaces/optionalIndex.interface';
-import { GetRooksCoordinates } from './getRooksCoordinates';
-
-export class GetSelectedMemberCoordinates {
-  constructor() {}
+import { RooksCoordinates } from './getRooksCoordinates';
+export class SelectedMemberCoordinates {
+  constructor() { }
 
   getMemberCoordinates(member: OptionalIndex, count?: boolean) {
     // this.initialSelectedCoin = member;
@@ -16,7 +15,7 @@ export class GetSelectedMemberCoordinates {
       member.cell.clue === Coins._wRookL ||
       member.cell.clue === Coins._wRookR
     ) {
-      coordinates = new GetRooksCoordinates().rook(
+      coordinates = new RooksCoordinates().rook(
         member.rowIndex,
         member.columnIndex
       );

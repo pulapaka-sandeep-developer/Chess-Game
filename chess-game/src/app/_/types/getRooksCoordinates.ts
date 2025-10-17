@@ -1,10 +1,10 @@
 import { Direction } from '../enums/direction.enum';
-import { Coordinate } from '../interfaces/coordinates.intreface';
+import { Coordinate } from '../interfaces/coordinates.interface';
 
-export class GetRooksCoordinates {
+export class RooksCoordinates {
   numberOfRows: number = 8;
   numberOfColumns: number = 8;
-  constructor() {}
+  constructor() { }
 
   rook(row: number, column: number): Coordinate[] {
     const surroundingCells: Coordinate[] = [];
@@ -41,3 +41,5 @@ export class GetRooksCoordinates {
     return surroundingCells;
   }
 }
+
+export const rook = new RooksCoordinates();

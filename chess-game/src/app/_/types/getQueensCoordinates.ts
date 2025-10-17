@@ -1,12 +1,13 @@
+import exp from 'constants';
 import { Coins } from '../enums/coins.enum';
 import { Direction } from '../enums/direction.enum';
-import { Coordinate } from '../interfaces/coordinates.intreface';
+import { Coordinate } from '../interfaces/coordinates.interface';
 import { OptionalIndex } from '../interfaces/optionalIndex.interface';
 
-export class GetQueensCoordinates {
+export class QueensCoordinates {
   numberOfRows: number = 8;
   numberOfColumns: number = 8;
-  constructor() {}
+  constructor() { }
   queen(row: number, column: number): Coordinate[] {
     const surroundingCells: Coordinate[] = [];
     surroundingCells.push({
@@ -62,3 +63,4 @@ export class GetQueensCoordinates {
     return surroundingCells;
   }
 }
+export const queen = new QueensCoordinates();

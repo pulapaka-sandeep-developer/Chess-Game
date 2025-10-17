@@ -1,5 +1,5 @@
 import { Direction } from "../enums/direction.enum";
-import { Coordinate } from "../interfaces/coordinates.intreface";
+import { Coordinate } from "../interfaces/coordinates.interface";
 
 export class NextPossibilityCoordinate {
 

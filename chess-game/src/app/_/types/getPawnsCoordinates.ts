@@ -1,10 +1,10 @@
 import { Direction } from '../enums/direction.enum';
-import { Coordinate } from '../interfaces/coordinates.intreface';
+import { Coordinate } from '../interfaces/coordinates.interface';
 
-export class GetPawnsCoordinates {
+export class PawnsCoordinates {
   numberOfRows: number = 8;
   numberOfColumns: number = 8;
-  constructor() {}
+  constructor() { }
 
   pawnB(row: number, column: number): Coordinate[] {
     const surroundingCells: Coordinate[] = [];
@@ -83,3 +83,4 @@ export class GetPawnsCoordinates {
     return surroundingCells;
   }
 }
+export const pawnsCoordinates = new PawnsCoordinates();

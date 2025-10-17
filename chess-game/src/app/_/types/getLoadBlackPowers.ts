@@ -1,12 +1,15 @@
 import { POWERSBLACk } from '../const/assigning-black-fontAwesome';
 import { Cell } from '../interfaces/cell.interface';
 
-export class GetLoadBlackPowers {
+export class LoadBlackPowers {
   numberOfRows: number = 8;
   numberOfColumns: number = 8;
   blackCoin = POWERSBLACk;
-  
-  constructor(private board: Cell[][]) {}
+  // board: Cell[][] = [];
+  constructor(private board: Cell[][]) {//private board: Cell[][]
+    // console.log(board);
+
+  }
 
   loadBlackConies() {
     this.board[this.numberOfRows - 1][this.numberOfColumns - 1] = {
@@ -121,6 +124,7 @@ export class GetLoadBlackPowers {
       isBlackCoin: true,
       icon: this.blackCoin[15].icon,
       color: true,
-    };
+    }; 
   }
 }
+export const getLoadBlackPowers = new LoadBlackPowers([]);
