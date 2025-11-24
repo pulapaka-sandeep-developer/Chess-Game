@@ -2,21 +2,19 @@ import { MatDialog } from "@angular/material/dialog";
 import { Cell } from "../interfaces/cell.interface";
 import { OptionalIndex } from "../interfaces/optionalIndex.interface";
 import { DialogBoxComponent } from "../../dialog-box/dialog-box.component";
+import { POWERSWHITE } from "../const/assigning-white-fontAwesome";
+import { POWERSBLACk } from "../const/assigning-black-fontAwesome";
 
 export class ChooseYourPower {
     dialog: MatDialog;
-    whiteCoin: Cell[] = [];
-    blackCoin: Cell[] = [];
+    whiteCoin: Cell[] = POWERSWHITE
+    blackCoin: Cell[] = POWERSBLACk
     board: Cell[][] = [];
     constructor(
         dialog: MatDialog,
-        whiteCoin: Cell[],
-        blackCoin: Cell[],
         board: Cell[][]
     ) {
         this.dialog = dialog;
-        this.whiteCoin = whiteCoin;
-        this.blackCoin = blackCoin;
         this.board = board;
     }
 

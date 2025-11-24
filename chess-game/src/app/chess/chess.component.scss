@@ -1,122 +1,202 @@
 :host {
+  // display: block;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
-  .profile-image {
-    padding: 30px;
-    display: flex;
-
-    .darkColor {
-      border: 4px outset greenyellow;
-    }
-    .lightColor {
-      border: 4px solid lightblue;
-    }
-
-    .image {
-      height: 58px;
-      padding: 6px 6px 0px 6px;
-      width: 58px;
-    }
-
-    .user {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around;
-      margin-left: 10px;
-      .name {
-        font-size: 16px;
-        font-weight: 500;
-      }
-      .color {
-        font-size: 16px;
-        font-weight: 500;
-      }
-    }
-  }
-
-  .content {
-    width: 200px;
-    height: 720px;
-    background-color: lightblue;
-    display: flex;
-    justify-content: center;
-  }
-
-  .row {
-    display: flex;
-  }
-
-  .main {
-    margin-left: 100px;
-    margin-right: 100px;
-    position: relative;
-    left: 0%;
-    top: 0px; //old 100
-    width: 500px;
-    height: 500px;
-    border: 6px solid black;
-
-    .row {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-evenly;
-      align-content: center;
-
-      .column {
-        width: 70px;
-        height: 62.5px;
+  .board {
+    display: block;
+    margin-top: 100px;
+    .main {
+      position: relative;
+      left: 0%;
+      top: 0px; //old 100
+      width: 500px;
+      height: 510px;
+      border: 6px solid rgb(117, 113, 21);
+      .row {
         display: flex;
         flex-direction: row;
         justify-content: space-evenly;
-        align-items: center;
+        align-content: center;
 
-        .cell {
-          height: 100%;
-          width: 100%;
-          font-size: 40px;
+        .column {
+          width: 70px;
+          height: 62.5px;
           display: flex;
+          flex-direction: row;
+          justify-content: space-evenly;
           align-items: center;
-          display: flex;
-          align-items: center;
-          justify-content: center;
 
-          .index {
-            font-size: 14px;
-            color: black;
-          }
+          .cell {
+            height: 100%;
+            width: 100%;
+            font-size: 40px;
+            display: flex;
+            align-items: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-          button {
-            i {
-              background-color: none;
-              font-size: 30px;
+            .index {
+              font-size: 14px;
+              color: black;
+            }
+
+            button {
+              i {
+                background-color: none;
+                font-size: 30px;
+              }
             }
           }
         }
+
+        .changeColor {
+          background-color: rgb(209, 134, 203);
+          // border: 0.1px solid rgb(168, 165, 165);
+          border: 0.01px solid rgb(216, 224, 208);
+        }
       }
 
-      .changeColor {
-        background-color: rgb(209, 134, 203);
-        // border: 0.1px solid rgb(168, 165, 165);
-        border: 0.01px solid rgb(216, 224, 208);
+      .brown {
+        background-color: #86c7df;
+      }
+
+      .green {
+        background-color: none;
+      }
+
+      .black {
+        background-color: none;
       }
     }
-
-    .brown {
-      background-color: #86c7df;
+    .red {
+      background-color: red;
     }
-
-    .green {
-      background-color: none;
-    }
-
-    .black {
-      background-color: none;
-    }
-  }
-  .red {
-    background-color: red;
   }
 }
+
+// :host {
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+
+//   .profile-image {
+//     padding: 30px;
+//     display: flex;
+
+//     .darkColor {
+//       border: 4px outset greenyellow;
+//     }
+//     .lightColor {
+//       border: 4px solid lightblue;
+//     }
+
+//     .image {
+//       height: 58px;
+//       padding: 6px 6px 0px 6px;
+//       width: 58px;
+//     }
+
+//     .user {
+//       display: flex;
+//       flex-direction: column;
+//       justify-content: space-around;
+//       margin-left: 10px;
+//       .name {
+//         font-size: 16px;
+//         font-weight: 500;
+//       }
+//       .color {
+//         font-size: 16px;
+//         font-weight: 500;
+//       }
+//     }
+//   }
+
+//   .content {
+//     width: 200px;
+//     height: 720px;
+//     background-color: lightblue;
+//     display: flex;
+//     justify-content: center;
+//   }
+
+//   .row {
+//     display: block;
+//   }
+
+//   .main {
+//     margin-left: 100px;
+//     margin-right: 100px;
+//     position: relative;
+//     left: 0%;
+//     top: 0px; //old 100
+//     width: 500px;
+//     height: 500px;
+//     border: 6px solid black;
+
+//     .row {
+//       display: flex;
+//       flex-direction: row;
+//       justify-content: space-evenly;
+//       align-content: center;
+
+//       .column {
+//         width: 70px;
+//         height: 62.5px;
+//         display: flex;
+//         flex-direction: row;
+//         justify-content: space-evenly;
+//         align-items: center;
+
+//         .cell {
+//           height: 100%;
+//           width: 100%;
+//           font-size: 40px;
+//           display: flex;
+//           align-items: center;
+//           display: flex;
+//           align-items: center;
+//           justify-content: center;
+
+//           .index {
+//             font-size: 14px;
+//             color: black;
+//           }
+
+//           button {
+//             i {
+//               background-color: none;
+//               font-size: 30px;
+//             }
+//           }
+//         }
+//       }
+
+//       .changeColor {
+//         background-color: rgb(209, 134, 203);
+//         // border: 0.1px solid rgb(168, 165, 165);
+//         border: 0.01px solid rgb(216, 224, 208);
+//       }
+//     }
+
+//     .brown {
+//       background-color: #86c7df;
+//     }
+
+//     .green {
+//       background-color: none;
+//     }
+
+//     .black {
+//       background-color: none;
+//     }
+//   }
+//   .red {
+//     background-color: red;
+//   }
+// }

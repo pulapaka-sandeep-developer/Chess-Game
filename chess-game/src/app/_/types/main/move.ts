@@ -5,6 +5,7 @@ import { OptionalIndex } from "../../interfaces/optionalIndex.interface";
 import { GameEnd } from "./gameEnd";
 import { Coordinate } from "../../interfaces/coordinates.interface";
 import { GameAlert } from "../gameAlert";
+import { ChooseYourPower } from "../chooseYourPower";
 
 export class Move {
     board: Cell[][] = [];
@@ -30,16 +31,17 @@ export class Move {
         } else {
             this.changeCoine(currentPosition, previousPosition);
         }
-        console.log('move',this.coordinates);
-        
+        // console.log('move',this.coordinates);
+
         // this.chooseYourPower(currentPosition); //dialog box needs here for power choose
         debugger
+        new ChooseYourPower(this.dialog, this.board).chooseYourPower(currentPosition);
         new GameAlert(this.board).alert();
         this.coordinates.forEach(
             (e: any) => (this.board[e.row][e.column].highlight = false)
         );
 
-      return  this.coordinates = [];
+        return this.coordinates = [];
     }
 
     changeCoine(currentPosition: OptionalIndex, previousPosition: OptionalIndex) {

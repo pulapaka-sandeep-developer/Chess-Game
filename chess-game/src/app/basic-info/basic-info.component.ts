@@ -117,17 +117,17 @@ export class BasicInfoComponent implements OnInit {
     if (this.player1) {
       this.playerName = 'First';
       this.playerOneUserInfo = this.selectFormGroup;
-      console.log('one', this.playerOneUserInfo);
+      // console.log('one', this.playerOneUserInfo);
 
     } else if (this.player2) {
       this.playerName = 'Second';
       this.playerTwoUserInfo = this.selectFormGroup;
-      console.log('two', this.playerTwoUserInfo);
+      // console.log('two', this.playerTwoUserInfo);
     }
   }
 
   uploadFile(event: any, number: number) {
-    console.log(number);
+    // console.log(number);
 
     let reader = new FileReader(); // HTML5 FileReader API
     let file = event.target.files[0];
@@ -150,7 +150,6 @@ export class BasicInfoComponent implements OnInit {
       };
       // ChangeDetectorRef since file is loading outside the zone
       // this.cd.markForCheck();
-      console.log();
     }
   }
 

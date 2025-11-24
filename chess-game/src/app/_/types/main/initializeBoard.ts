@@ -28,7 +28,7 @@ export class InitializeBoard {
                 };
             }
         }
-        console.log(this.board);
+        // console.log(this.board);
         this.prepareBoard();
         return this.board;
     }

@@ -60,7 +60,7 @@ export class GameEnd {
         ];
 
         let a = userData.find((e) => e.clue === 1);
-        console.log('user', a);
+        // console.log('user', a);
 
         this.dialog.open(CongratulationsComponent, {
             data: [a],

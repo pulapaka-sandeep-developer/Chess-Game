@@ -18,7 +18,7 @@ export class BlackKillsComponent implements OnChanges {
   ];
   ngOnChanges() {
     // this.dataf.push(this.data) 
-    console.log(this.data);
+    // console.log(this.data);
   }
   // ngDoCheck(): void {
   //   console.log(this.data);

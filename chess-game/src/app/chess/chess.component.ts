@@ -1,27 +1,19 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Coordinate } from '../_/interfaces/coordinates.interface';
-import { Coins } from '../_/enums/coins.enum';
 import { OptionalIndex } from '../_/interfaces/optionalIndex.interface';
 import { Cell } from '../_/interfaces/cell.interface';
-import { NextPossibilityCoordinate } from '../_/types/nextPossibilityCoordinate';
-import { POWERSBLACk } from '../_/const/assigning-black-fontAwesome';
-import { POWERSWHITE } from '../_/const/assigning-white-fontAwesome';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
 import { WiringService } from '../services/wiring.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
-import { CongratulationsComponent } from '../congratulations/congratulations.component';
-import { LoadBlackPowers } from '../_/types/getLoadBlackPowers';
-import { LoadWhitePowers } from '../_/types/getLoadWhitePowers';
 import { CheckPossibility } from '../_/types/players/check_Possibilities';
 import { GetAllMembersCoordinates } from '../_/types/rootGetsMembersCoordinates';
 import { CheckGame } from '../_/types/main/checkGame';
 import { InitializeBoard } from '../_/types/main/initializeBoard';
 import { Move } from '../_/types/main/move';
-import { GameAlert } from '../_/types/gameAlert';
+import { PreventMove, selectedCoin } from './preventMove';
 
 @Component({
   selector: 'app-chess',
@@ -33,8 +25,6 @@ import { GameAlert } from '../_/types/gameAlert';
     FormsModule,
     MatButtonModule,
     MatDialogModule,
-    // BlackKillsComponent,
-    // WhiteKillsComponent,
   ],
 })
 export class ChessComponent implements OnInit {
@@ -55,6 +45,8 @@ export class ChessComponent implements OnInit {
   playerOne: any = {};
   playerTwo: any = {};
 
+  private storePrevioueCell: selectedCoin[] = [];
+
   constructor(public dialog: MatDialog, private _selectedCell: WiringService) { }
 
   ngOnInit(): void {
@@ -72,7 +64,6 @@ export class ChessComponent implements OnInit {
   }
 
   $$selectMember(rowIndex: number, columnIndex: number, cell: Cell): void {
-    debugger
     if (cell.highlight) {
       this.currentPosition = {
         rowIndex: rowIndex,
@@ -88,6 +79,25 @@ export class ChessComponent implements OnInit {
         columnIndex: columnIndex,
         cell: cell,
       };
+      let selectedcell: OptionalIndex = {
+        rowIndex: rowIndex,
+        columnIndex: columnIndex,
+        cell: cell
+      }
+
+      let preventMovenemt = new PreventMove(selectedcell, this.storePrevioueCell, this.board).statusCheck();
+      if (preventMovenemt === undefined) {
+        return this.coordinates.forEach(
+          (e) => (this.board[e.row][e.column].highlight = false)
+        );
+      }
+      if (preventMovenemt) {
+        this.coordinates.forEach(
+          (e) => (this.board[e.row][e.column].highlight = false)
+        );
+        let coordinates = new GetAllMembersCoordinates(this.board, this.coordinates).getMemberCoordinates(this.previousPosition, true);
+        new CheckPossibility(this.board, this.coordinates).checkPossibilities(this.previousPosition, coordinates);
+      }
       this.coordinates.forEach(
         (e) => (this.board[e.row][e.column].highlight = false)
       );

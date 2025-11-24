@@ -26,7 +26,7 @@ export class CongratulationsComponent implements OnInit {
   player2: boolean = false;
 
   ngOnInit(): void {
-    console.log(this.data);
+    // console.log(this.data);
     
   }
 

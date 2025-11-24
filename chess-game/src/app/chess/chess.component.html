@@ -1,7 +1,6 @@
-<div>
-  <div class="profile-image" *ngIf="playerOne">
+<!--<div>
+   <div class="profile-image" *ngIf="playerOne">
     <span [ngClass]="whiteTurn ? 'darkColor' : 'lightColor'">
-      <!--  -->
       <img
         src="../../assets/images/sandeep.jpg"
         alt=""
@@ -13,24 +12,20 @@
       <span class="name">Sandeep</span>
       <span class="color">White</span>
     </div>
-  </div>
-</div>
-<div class="row">
-  <ng-container>
-    <!-- <app-black-kills [data]="BlackKiil"></app-black-kills> -->
-  </ng-container>
+  </div> 
+</div>-->
+<div class="board">
+  <!-- <ng-container>
+     <app-black-kills [data]="BlackKiil"></app-black-kills> 
+  </ng-container>-->
   <div class="main">
     <div class="row" *ngFor="let rows of board; let i = index">
       <div class="column" *ngFor="let cell of rows; let j = index">
-        <div
-          class="cell"
-          (click)="$$selectMember(i, j, cell)"
-          [ngClass]="{
+        <div class="cell" (click)="$$selectMember(i, j, cell)" [ngClass]="{
             changeColor: cell.highlight,
             brown: cell.color,
             red: cell.isAlert
-          }"
-        >
+          }">
           <!-- {{i}}-{{j}} -->
           <span *ngIf="cell.clue !== 0">
             <i [ngClass]="cell.icon"></i>
@@ -39,11 +34,11 @@
       </div>
     </div>
   </div>
-  <ng-container>
-    <!-- <app-white-kills [data]="whiteKiil"></app-white-kills> -->
-  </ng-container>
+  <!-- <ng-container>
+     <app-white-kills [data]="whiteKiil"></app-white-kills> 
+  </ng-container>-->
 </div>
-<div class="profile-image" *ngIf="playerTwo">
+<!-- <div class="profile-image" *ngIf="playerTwo">
   <span [ngClass]="BlackTurn ? 'darkColor' : 'lightColor'">
     <img src="../../assets/images/raghu.avif" alt="" srcset="" class="image" />
   </span>
@@ -56,5 +51,5 @@
       <span class="color">Black</span>
     </div>
   </div>
-</div>
+</div> -->
 <!-- <button mat-raised-button (click)="openCongratulationsComponent()">open</button> -->

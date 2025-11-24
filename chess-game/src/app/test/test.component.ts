@@ -25,7 +25,7 @@ export class TestComponent implements OnInit {
 	}
 	ngOnInit(): void {
 		this.game();
-		console.log(this.board);
+		// console.log(this.board);
 		
 		// console.log(this.game);
 		
